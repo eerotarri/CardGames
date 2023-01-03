@@ -1,0 +1,19 @@
+{
+  "name": "cardgames",
+  "version": "1.0.0",
+  "description": "Browser based card deck for stack card games for when someone forgets their deck and wants to play :P",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eerotarri/CardGames.git"
+  },
+  "author": "Eero Tarri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eerotarri/CardGames/issues"
+  },
+  "homepage": "https://github.com/eerotarri/CardGames#readme"
+}
