@@ -1,33 +1,62 @@
 body {
     text-align: center;
+    background-color: rgb(21, 21, 48);
+    color: rgb(229, 228, 227);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.deck {
+.cardcontainer {
+    position: relative;
     width: 150px;
     height: 210px;
-    
-    margin: 25px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 9px;
-    background-color: grey;
-    text-align: center;
-    display: block;
-    border: 2px solid black;
-    
+    margin-top: 25px;
+    background: rgb(231, 231, 252);
+    border-radius: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.thecard {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 1.5s ease-in;
+    border-radius: 10px;
     font-size: 50px;
     line-height: 187px;
+    border: 2px solid rgb(255, 255, 255);
+    background: #333;
+    
 }
 
-#draw-deck {
+.thecard.flipped-and-slided {
+    transform: rotateY(180deg) translate(0, 110%);
+    pointer-events: none;
+}
+
+.thefront {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: grey;
+    color: #333;
+    text-align: center;
+    border-radius: 10px;
+    transform: rotateY(0deg);
+}
+
+.theback {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(-180deg);
+    border-radius: 10px;
     background-size: cover;
 }
 
-#draw-deck:hover {
-    background-color: rgb(189, 189, 189);
-}
-
-#drawn-deck {
-    background-color: blue;
-    background-size: cover;
+.info {
+    margin-top: 250px;
 }

@@ -1,6 +1,7 @@
 let deck = {
     deck_id: "8g7e7aylch15",
     kings: 0,
+    priorityIndex: 2,
 };
 
 let rules = {
@@ -16,54 +17,58 @@ let rules = {
     "0": "Ten is category",
     "J": "New rule!",
     "Q": "Questions!",
-    "K": "Pour some on the cup.\n Last one drinks!", 
+    "K": "Pour some in the cup. Last king drinks!", 
 }
+const ruleInfo = document.getElementsByClassName('info')[0];
 
-const drawn = document.getElementById('drawn-deck');
-const ruleInfo = document.getElementById('info');
+const thecontainer = document.getElementsByClassName('cardcontainer')[0];
+let thecard = document.getElementsByClassName('thecard')[0];
+let theback = document.getElementsByClassName('theback')[0];
 
 // Initializing should be useless as long as only one deck is needed
 // In case multiple sessions are needed that might not be the case but
 // it's not important at the moment
 const initDeck = () => {
-    console.log("Initialized");
-
-    fetch("https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            deck = data;
-        })
+    fetch("https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1");
 }
 
 const resuffleDeck = () => {
-    console.log("Deck suffled");
-
     fetch(`https://www.deckofcardsapi.com/api/deck/${deck.deck_id}/shuffle/`)
-        .then(response => response.json())
-        .then(data => console.log(data))
-    
 }
 
 const drawCard = () => {
-    console.log("Draw a card");
-
     fetch(`https://www.deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1`)
-        .then(response => response.json())
+        .then(response => {
+            thecard.style.zIndex = deck.priorityIndex++;
+            return response.json();
+        })
         .then(data => {
             if (data.remaining !== 0) {
-                drawn.style.backgroundImage = `url('${data.cards[0].image}')`;
-                let cardValue = data.cards[0].code[0];
-                console.log(cardValue);
-                console.log(rules[cardValue]);
+                const cardTemplate = thecard.cloneNode(true);
+                thecontainer.appendChild(cardTemplate);
 
+                thecard.classList.toggle('flipped-and-slided');
+
+                theback.style.backgroundImage = `url('${data.cards[0].image}')`;
+
+
+                let cards = document.querySelectorAll('.thecard');
+                thecard = cards[cards.length - 1];
+                thecard.style.zIndex = 1;
+
+                let backs = document.querySelectorAll('.theback');
+                theback = backs[backs.length - 1];
+
+                
+                let cardValue = data.cards[0].code[0];
                 ruleInfo.textContent = rules[cardValue];
-                deck.kings += 1;
-                console.log(deck.kings);
+            } else {
+                let fronts = document.querySelectorAll('.thefront');
+                thefront = fronts[fronts.length - 1];
+                thefront.textContent = 'Empty';
             }
         })
 }
 
 // Initialize the deck when page is opened or refreshed
-
 resuffleDeck();

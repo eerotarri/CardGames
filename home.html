@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ring of Fire</title>
+    <title>Card Games: Ring of Fire</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-
+    <link rel="icon" type="image/png" href="Gaming-Cards-icon.png">
 </head>
 <body>
     <h1>Ring of Fire</h1>
-    <!-- <button onclick="initDeck()">Get a new deck</button> -->
-    <div class="deck" id="draw-deck" onclick="drawCard()">Draw</div>
-    <div class="deck" id="drawn-deck"></div>
-    <p id="info">Rules</p>
+    <div class="cardcontainer">
+        <div class="thecard">
+            <div class="thefront" onclick="drawCard()">Draw</div>
+            <div class="theback"></div>
+        </div>
+    </div>
 
+    <p class="info">Rules</p>
+    
     <script src="deckUtils.js"></script>
 </body>
 <!-- <footer>
@@ -23,5 +27,3 @@
     <p>Version: 1.0</p>
 </footer> -->
 </html>
-
-<!-- <i class="fas fa-star"></i> star icon -->
